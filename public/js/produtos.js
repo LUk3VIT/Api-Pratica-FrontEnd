@@ -1,4 +1,5 @@
 const token = verifyLogin();
+console.log(token)
 const form = document.querySelector("#produtoForm");
 const list = document.querySelector("#listaProdutos");
 const logoutBtn = document.querySelector("#logout");
@@ -10,6 +11,8 @@ if (form) {
     e.preventDefault();
     const name = e.target.nome.value;
     const preco = e.target.preco.value;
+
+    console.log (name,preco)
 
     const data = await apiRequest("/api/produto", "POST", { name, preco }, token);
 
@@ -29,6 +32,7 @@ async function carregarProdutos() {
 
   const produtos = await apiRequest("/api/produto", "GET", null, token);
 
+ 
   if (!Array.isArray(produtos)) {
     if (produtos.message !== "Sessão expirada") {
       console.error("Resposta inesperada:", produtos);

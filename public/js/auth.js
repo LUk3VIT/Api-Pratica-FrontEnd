@@ -11,11 +11,14 @@ if (loginForm) {
     const email = e.target.email.value;
     const senha = e.target.senha.value;
 
-    const data = await apiRequest("/api/auth/login", "POST", { email, password: senha });
+    console.log (email, senha)
 
-    if (data.token) {
+    const data = await apiRequest("/api/auth/login", "POST", { email: email, password: senha });
+    console.log (data)
 
-      localStorage.setItem("token", data.token);
+    if (data) {
+
+      localStorage.setItem("token", data);
       setTimeout(() => window.location.href = "produtos.html", 200);
 
     } else {
