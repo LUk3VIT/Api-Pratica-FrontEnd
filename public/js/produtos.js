@@ -1,5 +1,4 @@
 const token = verifyLogin();
-console.log(token)
 const form = document.querySelector("#produtoForm");
 const list = document.querySelector("#listaProdutos");
 const logoutBtn = document.querySelector("#logout");
@@ -31,7 +30,6 @@ async function carregarProdutos() {
   if (!list) return;
 
   const produtos = await apiRequest("/api/produto", "GET", null, token);
-
  
   if (!Array.isArray(produtos)) {
     if (produtos.message !== "Sessão expirada") {
@@ -41,12 +39,14 @@ async function carregarProdutos() {
     return;
   }
 
+  console.log(produtos.name, produtos.tipo)
+
   list.innerHTML = "";
   produtos.forEach((p) => {
     const item = document.createElement("li");
     item.innerHTML = `
       <span class="produto-nome"><strong>${p.name}</strong></span> 
-      <span class="produto-preco">R$ ${p.preco.toFixed(2)}</span>
+      <span class="produto-preco">R$ ${p.tipo}</span>
       <button id="editButton" class="btn-acao" onclick="editProd('${p.name}')">✏️</button>
       <button id="deleteButton" class="btn-acao" onclick="deleteProd('${p.name}')">🗑️</button>
     `;
