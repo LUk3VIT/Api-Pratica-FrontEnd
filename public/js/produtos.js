@@ -11,9 +11,10 @@ if (form) {
     const name = e.target.nome.value;
     const preco = e.target.preco.value;
 
-    console.log (name,preco)
-
+    
     const data = await apiRequest("/api/produto", "POST", { name, preco }, token);
+
+    console.log (data)
 
     if (data.error) {
       if (data.message !== "Sessão expirada") alert(data.error || data.message);
@@ -39,14 +40,12 @@ async function carregarProdutos() {
     return;
   }
 
-  console.log(produtos.name, produtos.tipo)
-
   list.innerHTML = "";
   produtos.forEach((p) => {
     const item = document.createElement("li");
     item.innerHTML = `
       <span class="produto-nome"><strong>${p.name}</strong></span> 
-      <span class="produto-preco">R$ ${p.tipo}</span>
+      <span class="produto-preco">R$ ${p.valor}</span>
       <button id="editButton" class="btn-acao" onclick="editProd('${p.name}')">✏️</button>
       <button id="deleteButton" class="btn-acao" onclick="deleteProd('${p.name}')">🗑️</button>
     `;
