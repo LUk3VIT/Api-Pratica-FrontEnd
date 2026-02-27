@@ -41,6 +41,8 @@ if (registerForm) {
 
     const data = await apiRequest("/api/auth/register", "POST", { name: nome, email, password: senha });
 
+    console.log(data);
+
     if (data.error) {
 
       registerMsg.textContent = data.message || "Erro no cadastro";

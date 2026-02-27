@@ -11,8 +11,8 @@ if (form) {
     const name = e.target.nome.value;
     const preco = e.target.preco.value;
 
-    
-    const data = await apiRequest("/api/produto", "POST", { name, preco }, token);
+
+    const data = await apiRequest("/api/produto", "POST", { name: name, valor: preco }, token);
 
     console.log (data)
 
@@ -58,7 +58,11 @@ async function editProd(name) {
   const novoPreco = parseFloat(prompt("Novo preço:"));
   if (!novoNome || isNaN(novoPreco)) return alert("Dados inválidos");
 
-  await apiRequest(`/api/produto/${name}`, "PUT", { newName: novoNome, preco: novoPreco }, token);
+  console.log (novoNome, novoPreco);
+
+  const update = await apiRequest(`/api/produto/${name}`, "PUT", { name: novoNome, valor: novoPreco }, token);
+
+  console.log (update)
   carregarProdutos();
 }
 
