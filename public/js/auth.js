@@ -43,7 +43,7 @@ if (registerForm) {
 
     console.log(data);
 
-    if (data.error) {
+    if (!data.error) {
 
       registerMsg.textContent = data.message || "Erro no cadastro";
       registerMsg.classList.remove("success");
